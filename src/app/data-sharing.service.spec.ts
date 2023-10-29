@@ -15,18 +15,19 @@
     Ayuda:      https://parzibyte.me/blog/contrataciones-ayuda/
     Contacto:   https://parzibyte.me/blog/contacto/
 */
-const conexion = require("./conexion")
-module.exports = {
-  insertar(idVenta, idProducto) {
-    return new Promise((resolve, reject) => {
-      conexion.query(`insert into productos_vendidos
-            (id_venta, id_producto)
-            values
-            (?, ?)`,
-        [idVenta, idProducto], (err, resultados) => {
-          if (err) reject(err);
-          else resolve(resultados.insertId);
-        });
-    });
-  },
-}
+import { TestBed } from '@angular/core/testing';
+
+import { DataSharingService } from './data-sharing.service';
+
+describe('DataSharingService', () => {
+  let service: DataSharingService;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({});
+    service = TestBed.inject(DataSharingService);
+  });
+
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
+});

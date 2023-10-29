@@ -15,11 +15,27 @@
     Ayuda:      https://parzibyte.me/blog/contrataciones-ayuda/
     Contacto:   https://parzibyte.me/blog/contacto/
 */
-const mysql = require("mysql2");
-// Coloca aquí tus credenciales
-module.exports = mysql.createPool({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-});
+import {Component, Input, OnInit} from '@angular/core';
+
+@Component({
+  selector: 'app-loading-button',
+  templateUrl: './loading-button.component.html',
+  styleUrls: ['./loading-button.component.css'],
+  /*
+  Aquí iría el modo de uso de DOM shadow pero ningunó sirvió, ya que
+  no se tomaba el color del botón. Por eso es que el contenido del botón se maneja como texto y
+  no como slot
+   */
+
+})
+export class LoadingButtonComponent implements OnInit {
+  @Input() cargando: boolean
+  @Input() texto: string
+
+  constructor() {
+  }
+
+  ngOnInit(): void {
+  }
+
+}
