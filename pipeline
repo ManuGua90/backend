@@ -112,8 +112,8 @@ pipeline{
 
                 sshagent(['conferencia-dev']) {
                         echo "ingreso correctamente"
-                        sh "ssh -tt -o StrictHostKeyChecking=no ubuntu@52.14.75.195 cd backend && git pull origin master"
-                        sh "ssh -tt -o StrictHostKeyChecking=no ubuntu@52.14.75.195 cd frontend && git pull origin master"
+                        sh "ssh -tt -o StrictHostKeyChecking=no ubuntu@52.14.75.195 'cd backend && git pull origin master'"
+                        sh "ssh -tt -o StrictHostKeyChecking=no ubuntu@52.14.75.195 'cd frontend && git pull origin master'"
                     }
             }
     
@@ -124,8 +124,7 @@ pipeline{
 
             sshagent(['conferencia-dev']) {
                     script {
-                            sh "ssh ubuntu@52.14.75.195 cd backend && ls"
-                            sh "ssh ubuntu@52.14.75.195 cd backend && docker-compose up --build -d"
+                        sh "ssh -o StrictHostKeyChecking=no ubuntu@52.14.75.195 'cd backend && docker-compose up --build -d'"
                         
                     }
                 }
