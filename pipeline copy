@@ -1,0 +1,73 @@
+pipeline{
+    agent any
+    tools {
+        nodejs 'nodejs'
+    }
+    stages{
+        stage('Source Code M'){
+            steps{
+                git credentialsId: 'github-proyecto', url: 'https://github.com/ManuGua90/backend.git'
+                git credentialsId: 'github-proyecto', url: 'https://github.com/ManuGua90/frontend.git'
+            }
+        }
+        
+        stage('SonarQube Analysis') {
+            steps {
+                script {
+                    def scannerHome = tool name: 'scanner_sonarqube'
+                    withSonarQubeEnv('Srvsonarqube') {
+                        echo "Creando Proyecto"
+                        sh """
+                            ${scannerHome}/bin/sonar-scanner \
+                            -Dsonar.projectKey=my-javascript-project \
+                            -Dsonar.sources=src \
+                            -Dsonar.host.url=http://18.222.205.50:9000 \
+                            -Dsonar.login=squ_ed8b781c0ac28b8f406c697af2b4783fc05d311c
+                        """
+                    }
+                }
+            }
+        }
+     
+        
+        stage('Pruebas Unitarias') {
+            steps {
+                //sh "cd /var/lib/jenkins/workspace/Proyecto_final && npm install && ng test --watch=false --code-coverage"
+                sh "cd /var/lib/jenkins/workspace/Proyecto_final && npm install"
+
+            }
+        }
+        stage("Source Code M Produccion"){
+            steps{
+
+            sshagent(['conferencia-dev']) {
+                    echo "ingreso correctamente"
+                    sh "ssh -tt -o StrictHostKeyChecking=no ubuntu@52.14.75.195 cd backend && git pull origin master"
+                    sh "ssh -tt -o StrictHostKeyChecking=no ubuntu@52.14.75.195 cd frontend && git pull origin master"
+                }
+            }
+    
+        }
+        
+        stage("Deploy a Producción"){
+            steps{
+
+            sshagent(['conferencia-dev']) {
+                    script {
+                        sh "ssh ubuntu@52.14.75.195 docker-compose up --build -d"
+                    }
+                }
+            }
+        }
+
+        
+    }
+   post {
+        success {
+            echo 'Pipeline ejecutado correctamente 🎉'
+        }
+        failure {
+            echo 'Algo falló 💥'
+        }
+    }
+}

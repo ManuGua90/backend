@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexoTech - Soluciones Tecnológicas | InteraFEL</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+        }
+        
+        nav {
+            background-color: #34495e;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin: 0 1rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            background-color: #1abc9c;
+        }
+        
+        main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        section {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #1abc9c;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        .destacado {
+            background-color: #f9f9f9;
+            padding: 1rem;
+            border-left: 4px solid #1abc9c;
+            margin: 1rem 0;
+        }
+        
+        .hero-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+        }
+        .team-image{
+            width: 10%;
+            height: 40px;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+        }
+        
+        .logo {
+            max-height: 80px;
+            margin-bottom: 0.5rem;
+        }
+        
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+        
+        .galeria {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .galeria-item {
+            height: 200px;
+            background-color: #ecf0f1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .galeria-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .galeria-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+        
+        .galeria-item p {
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <!-- <img src="logo.png" alt="NexoTech Logo" class="logo"> -->
+        <h1>NexoTech</h1>
+        <p>Soluciones tecnológicas para impulsar tu negocio</p>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#nosotros">Nosotros</a></li>
+            <li><a href="#servicios">Servicios</a></li>
+            <li><a href="#galeria">Galería</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+        </ul>
+    </nav>
+    
+    <main>
+        <section id="inicio">
+            <h2>Inicio</h2>
+            <img src="IMG/integraFEL.png" alt="Software InteraFEL en uso" class="hero-image">
+            <p>Bienvenido a NexoTech. Somos una empresa líder en desarrollo de productos y servicios tecnológicos.</p>
+            <p>Nuestras soluciones están diseñadas para optimizar procesos de negocios, mejorar la eficiencia operativa y facilitar el cumplimiento de requisitos legales y fiscales.</p>
+            <div class="destacado">
+                <p>Descubre InteraFEL, nuestro software estrella para facturación electrónica y gestión de inventarios.</p>
+            </div>
+        </section>
+        
+        <section id="nosotros">
+            <h2>Nosotros</h2>
+            <p>NexoTech es una empresa especializada en el desarrollo de productos y servicios tecnológicos innovadores para empresas de todos los tamaños.</p>
+            <!-- <img src="IMG/logo.png" alt="Equipo de NexoTech" class="team-image"> -->
+            <p>Con más de una década de experiencia en el mercado, nos hemos convertido en referentes en soluciones de facturación electrónica y sistemas de gestión empresarial.</p>
+            <p>Nuestro equipo está formado por ingenieros, desarrolladores y especialistas en experiencia de usuario comprometidos con la excelencia y la satisfacción del cliente.</p>
+        </section>
+        
+        <section id="servicios">
+            <h2>Servicios</h2>
+            <p>En NexoTech ofrecemos una amplia gama de soluciones tecnológicas para impulsar el crecimiento de su empresa:</p>
+            <ul>
+                <li>Implementación de InteraFEL: sistema de facturación electrónica</li>
+                <li>Gestión de inventarios y control de stock</li>
+                <li>Consultoría en transformación digital</li>
+                <li>Desarrollo de software a medida</li>
+                <li>Soporte técnico especializado 24/7</li>
+            </ul>
+            <div class="destacado">
+                <p>InteraFEL: Nuestro software insignia que simplifica la emisión de facturas electrónicas y optimiza la gestión de inventarios.</p>
+            </div>
+        </section>
+        
+        <section id="galeria">
+            <h2>Galería</h2>
+            <p>Conozca las características principales de InteraFEL y nuestras soluciones tecnológicas:</p>
+            <div class="galeria">
+                <div class="galeria-item">
+                    <img src="IMG/factura.png" alt="Módulo de Facturación">
+                    <p>Módulo de Facturación</p>
+                </div>
+                <div class="galeria-item">
+                    <img src="IMG/inventario.png" alt="Control de Inventario">
+                    <p>Control de Inventario</p>
+                </div>
+                <div class="galeria-item">
+                    <img src="IMG/reporte.png" alt="Reportes y Estadísticas">
+                    <p>Reportes y Estadísticas</p>
+                </div>
+                <div class="galeria-item">
+                    <img src="IMG/panel.png" alt="Panel de Administración">
+                    <p>Panel de Administración</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="contacto">
+            <h2>Contacto</h2>
+            <p>¿Interesado en InteraFEL o alguna de nuestras soluciones? Contacte con nuestro equipo de ventas.</p>
+            <p><strong>Email:</strong> tomuch94@gmail.com</p>
+            <p><strong>Teléfono:</strong> +502 4249 1889</p>
+            <p><strong>Dirección:</strong> Avenida Tecnológica 45, Zona 10, Ciudad Guatemala</p>
+            <div class="destacado">
+                <p>Solicite una demostración gratuita de InteraFEL y descubra cómo puede transformar la gestión de su negocio.</p>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <img src="/api/placeholder/150/60" alt="NexoTech Logo Footer" class="logo">
+        <p>&copy; 2025 NexoTech. Todos los derechos reservados.</p>
+        <p>InteraFEL es una marca registrada de NexoTech</p>
+    </footer>
+</body>
+</html>

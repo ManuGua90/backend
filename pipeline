@@ -1,0 +1,146 @@
+pipeline{
+    agent any
+    tools {
+        nodejs 'nodejs'
+    }
+        stages{
+            stage('Source Code Management'){
+                parallel {
+                    stage('Backend Clone') {
+                        steps {
+                            dir('backend') {
+                                git credentialsId: 'github-proyecto', url: 'https://github.com/ManuGua90/backend.git'
+                            }
+                        }
+                    }
+                    stage('Frontend Clone') {
+                        steps {
+                            dir('frontend') {
+                                git credentialsId: 'github-proyecto', url: 'https://github.com/ManuGua90/frontend.git'
+                            }
+                        }
+                    }
+                }
+            }
+        stage('Build') {
+            parallel {
+                stage('Backend Build') {
+                    steps {
+                        dir('backend') {
+                            // sh 'npm install'
+                            // sh 'npm run build'
+                            sh 'ls'
+                        }
+                    }
+                }
+                stage('Frontend Build') {
+                    steps {
+                        dir('frontend') {
+                            // sh 'npm install'
+                            // sh 'npm run build'
+                            sh 'ls'
+                        }
+                    }
+                }
+            }
+        }   
+        stage('Code Quality') {
+            parallel {
+                stage('Backend SonarQube Analysis') {
+                    steps {
+                        sh 'ls'
+                    }
+                }
+                stage('Frontend SonarQube Analysis') {
+                    steps {
+
+                            sh 'ls'
+                            // script {
+                            //     def scannerHome = tool name: 'scanner_sonarqube'
+                            //     withSonarQubeEnv('Srvsonarqube') {
+                            //         echo "Creando Proyecto"
+                            //         sh """
+                            //             ${scannerHome}/bin/sonar-scanner \
+                            //             -Dsonar.projectKey=my-javascript-project \
+                            //             -Dsonar.sources=src \
+                            //             -Dsonar.host.url=http://18.222.205.50:9000 \
+                            //             -Dsonar.login=squ_ed8b781c0ac28b8f406c697af2b4783fc05d311c
+                            //         """
+                            //     }
+                            // }
+                        
+                    }
+                }
+            }
+        } 
+    
+        stage('Test') {
+            parallel {
+                stage('Backend Tests') {
+                    steps {
+                        dir('backend') {
+                            echo 'npm test'
+                        }
+                    }
+                }
+                stage('Frontend Tests') {
+                    steps {
+                        //sh "cd /var/lib/jenkins/workspace/Proyecto_final && npm install && ng test --watch=false --code-coverage"
+                        sh "cd /var/lib/jenkins/workspace/Proyecto_final && npm install"
+                    }
+                }
+            }
+        }
+        stage('Integration Tests') {
+            steps {
+                echo 'Ejecutando pruebas de integración'
+                // Aquí irían las pruebas de integración
+                // Por ejemplo, tests e2e con Cypress o similar
+                // sh 'npm run test:e2e'
+            }
+        }
+        
+        stage('Security Scan') {
+            steps {
+                echo 'Ejecutando escaneo de seguridad'
+                // Aquí podría ir un análisis de seguridad como OWASP ZAP
+                // sh 'npm audit'
+            }
+        }
+        stage("Source Code Management Produccion"){
+            steps{
+
+                sshagent(['conferencia-dev']) {
+                        echo "ingreso correctamente"
+                        sh "ssh -tt -o StrictHostKeyChecking=no ubuntu@52.14.75.195 cd backend && git pull origin master"
+                        sh "ssh -tt -o StrictHostKeyChecking=no ubuntu@52.14.75.195 cd frontend && git pull origin master"
+                    }
+            }
+    
+        }
+        
+        stage("Deploy a Producción"){
+            steps{
+
+            sshagent(['conferencia-dev']) {
+                    script {
+                        dir('backend') {
+                            sh "ssh ubuntu@52.14.75.195 docker-compose up --build -d"
+                        }
+                        
+                    }
+                }
+            }
+        }
+
+        
+    }
+   post {
+        success {
+            echo 'Pipeline ejecutado correctamente 🎉'
+        }
+        failure {
+            echo 'Algo falló 💥'
+        }
+    }
+}
