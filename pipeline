@@ -124,9 +124,8 @@ pipeline{
 
             sshagent(['conferencia-dev']) {
                     script {
-                        dir('backend') {
-                            sh "ssh ubuntu@52.14.75.195 docker-compose up --build -d"
-                        }
+                            sh "ssh ubuntu@52.14.75.195 cd backend && ls"
+                            sh "ssh ubuntu@52.14.75.195 cd backend && docker-compose up --build -d"
                         
                     }
                 }
